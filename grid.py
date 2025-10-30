@@ -56,14 +56,18 @@ class Grid:
         Returns:
             None
         """
-        self.win.fill(COLORS['WHITE'])  # fill the window with white color
+        # OLD CODE: (we're keeping the fill as rect, but restoring update() for real-time algos)
+        # pygame.draw.rect(self.win, COLORS['WHITE'], (0, 0, self.width, self.height))
+
+        # NEW REPLACEMENT: Restore full update for real-time, but keep rect fill
+        pygame.draw.rect(self.win, COLORS['WHITE'], (0, 0, self.width, self.height))
 
         for row in self.grid:
             for spot in row:
                 spot.draw(self.win)   # draw each spot
 
         self.draw_grid_lines()        # draw the grid lines          
-        pygame.display.update()       # update the display
+        pygame.display.update()       # update the display (restored for real-time algo visualization)
 
     def get_clicked_pos(self, pos: tuple[int, int]) -> tuple[int, int]:
         """
@@ -73,12 +77,12 @@ class Grid:
         Returns:
             tuple[int, int]: The (row, col) position of the clicked spot in the grid.
         """
-        spot_width = self.width // self.cols
-        spot_height = self.height // self.rows
+        spot_width = self.width // self.rows
+        spot_height = self.height // self.cols
         x, y = pos
-        col = x // spot_width
-        row = y // spot_height
-        return col, row
+        row = x // spot_width
+        col = y // spot_height
+        return row, col
     
     def reset(self) -> None:
         """

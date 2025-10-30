@@ -18,3 +18,8 @@ COLORS = {
     'GREY': (128, 128, 128),      # grid lines
     'TURQUOISE': (64, 224, 208)   # neighbor nodes
 }
+
+# NEW ADDITION: Constants for layout (added after COLORS)
+GRID_SIZE = 800
+SIDEBAR_WIDTH = 200
+TOTAL_WIDTH = GRID_SIZE + SIDEBAR_WIDTH
